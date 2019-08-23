@@ -177,3 +177,142 @@ edges <- function(vec){
   
 }
 
+#default arguement for functions
+
+my_exp2 <- function(base, exponent = 2){
+  
+  return(base^exponent)
+}
+
+my_exp2(3,2)
+my_exp2(3)
+my_exp2(3,3)
+
+my_exp2(base = 3)
+
+center <- function(data,midpoint = 0){
+  
+  new_data <- (data - mean(data)) + midpoint
+  
+  return(new_data)
+}
+
+center(c(0,0,0))
+center(c(1,2,3))
+center(data = c(1,2,3), midpoint = 10)
+
+inf_data
+head(inf_data)
+center(inf_data$V1)
+day7_centered <- center(inf_data$V7)
+hist(day7_centered)
+
+all.equal(mean(day7_centered),0)
+day7_centered + mean(inf_data$V7)
+inf_data$V7
+
+center <- function(data, midpoint = 0){
+  
+  # Returns a new vector containing the original data re-centered around the midpoint of the data.
+  # Arguments are a vector of data and an optional midpoint (default to 0).
+  # Eg. center(1,2,3) => c(-1,0,1)
+  
+  new_data <- (data - mean(data)) + midpoint
+  return(new_data)
+}
+
+# Write a function called analyze that takes a filename (eg "data.csv") and plots the minimum, maximum, and average of the data over time.
+
+apply(X = data.frame(1,2,3),MARGIN = 1,FUN = mean)
+apply(X = inf_data,MARGIN = 2,FUN = mean)
+
+analyze <- function(dataframe){
+  
+  mins <- apply(X = dataframe, MARGIN = 2, FUN = min)
+  plot(mins,xlab = "days",ylab = "inflammation",main = "Minimum inflammation", col = "green", pch = 3)
+  
+  maxs <- apply(X = dataframe, MARGIN = 2, FUN = max)
+  plot(maxs,xlab = "days",ylab = "inflammation",main = "maximum inflammation", col = "blue", pch = 5)
+  
+  means <- apply(X = dataframe, MARGIN = 2, FUN = mean)
+  plot(means,xlab = "days",ylab = "inflammation",main = "average inflammation", col = "red", pch =1)
+  
+  }
+
+#For Loops
+
+for(i in 1:10){
+  
+  print(i)
+}
+
+for(i in 1:10){
+  
+  print("a")
+
+}
+
+sentence <- c("Let", "the", "computer", "do", "the", "work")
+
+print(sentence[1])
+sentence
+
+for(word in sentence){
+  
+  print(word)
+  
+}
+
+colors <- c("blue", "red", "green", "yellow")
+
+for(col in colors){
+  
+  print(paste("My favorite color is", col))
+}
+
+my_length <- function(vec){
+  
+  len <-0
+  for(element in vec){
+    
+    len <- len +1
+  }
+  
+  return(len)
+}
+
+test_vec <- c("a", "e", "i", "o", "u")
+my_length(test_vec)
+
+# Write a function called my_sum that takes a vector of numbers and returns a sum
+# Eg c(1,2,3) => 6
+# Eg c(2,2,3,3) => 10
+# Don't use sum()
+
+my_sum <- function(vec){
+  
+  total <- 0
+  for(element in vec){
+    
+    total <- total + element
+    
+  } #end loop
+  return(total)
+} #end function
+my_sum(c(1,2,3))
+
+a <- c(1,3,5,7)
+my_sum(a)
+
+file_path <- "/home/nwknoblauch/Public/r-novice-inflammation/data/inflammation-"
+
+for(i in 1:9){
+  
+  current_file <- paste0(file_path, "0", i, ".csv")
+  
+  data <- read.csv(current_file, header = FALSE)
+  
+  analyze(data)
+}
+
+#end lesson
